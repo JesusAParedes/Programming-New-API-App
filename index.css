@@ -1,0 +1,12 @@
+#div1 {
+    margin-left: 150px;
+}
+
+#but {
+    margin: 0px 40px 0px 10px;
+}
+
+button {
+    border-radius: 40px;
+    border-color: gray;
+}

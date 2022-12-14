@@ -1,12 +1,17 @@
 #div1 {
-    margin-left: 150px;
+    margin-left: 13%;
 }
 
-#but {
-    margin: 0px 40px 0px 10px;
+img {
+    display: flex;
 }
 
 button {
     border-radius: 40px;
     border-color: gray;
 }
+
+#but2 {
+    margin-left: 12%;
+}
+

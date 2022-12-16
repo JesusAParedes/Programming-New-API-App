@@ -38,7 +38,7 @@ const frontSprite = () => {
     but2.innerHTML = 'Slowpoke Stats';
     document.body.append(but2);
 
-    but2.addEventListener('click', pokemonInfo2);
+    but2.addEventListener('click', createTable2);
 
 }
 
@@ -55,24 +55,113 @@ const backSprite = () => {
     but.innerHTML = 'Chikorita Stats';
     document.body.append(but);
 
-    but.addEventListener('click', pokemonInfo1);
+    but.addEventListener('click', createTable);
 
 }
 
 const createTable = (localArray) => {
     const table = document.createElement('table');
+    const di = document.getElementById('something');
+    localArray = Object.values(pokemonData1);
+    // console.log(localArray)
+
     localArray.forEach(info => {
         let aRow = document.createElement('tr');
-        Object.values(info).forEach(type => {
-            let cell = document.createElement('td');
-            cell.innerText = type
+        Object.values(info).filter((name, pos) => {
+            // console.log(name)
+            if((name === pokemonData1.name) && (Object.values(info).indexOf(name) === pos)) {
+                let cell = document.createElement('td');
+                cell.innerText = name
                 aRow.appendChild(cell);
-        })
+            }})
+
+        let bRow = document.createElement('tr');
+        Object.values(info).forEach((typesObject, pos) => {
+            if(typesObject !== null) {
+                Object.values(typesObject).forEach(typeObject => {
+                    Object.values(typeObject).filter(type => {
+                        // console.log(type);
+                        if((type === pokemonData1.types[0].type['name']) && (Object.values(typeObject).indexOf(type) === pos)) {
+                        let cell = document.createElement('td');
+                        cell.innerText = type
+                        bRow.appendChild(cell);
+                    }})})}})
+
+        let cRow = document.createElement('tr');
+        Object.values(info).forEach((typesObject, pos) => {
+            // console.log(typesObject)
+            if(typesObject !== null) {
+                Object.values(typesObject).filter((baseStat,index) => {
+                // console.log(baseStat)
+                    if((baseStat === pokemonData1.stats[1].base_stat) && (Object.values(typesObject).indexOf(baseStat) === index)) {
+                    let cell = document.createElement('td');
+                    cell.innerText = baseStat
+                    cRow.appendChild(cell)
+                }})}})
+
         table.appendChild(aRow);
-
+        table.appendChild(bRow);
+        table.appendChild(cRow);
     })
-
+    di.append(table);
 }
+
+const createTable2 = (localArray2) => {
+    const table = document.createElement('table');
+    const di = document.getElementById('something');
+    localArray2 = Object.values(pokemonData2);
+    console.log(localArray2)
+
+    localArray2.forEach(info => {
+        let aRow = document.createElement('tr');
+        Object.values(info).filter((name, pos) => {
+            // console.log(name)
+            if((name === pokemonData2.name) && (Object.values(info).indexOf(name) === pos)) {
+                let cell = document.createElement('td');
+                cell.innerText = name
+                aRow.appendChild(cell);
+            }})
+
+        let bRow = document.createElement('tr');
+        Object.values(info).forEach((typesObject, pos) => {
+            if(typesObject !== null) {
+                Object.values(typesObject).forEach(typeObject => {
+                    Object.values(typeObject).filter(type => {
+                        // console.log(type);
+                        if((type === pokemonData2.types[0].type['name']) && (Object.values(typeObject).indexOf(type) === pos)) {
+                        let cell = document.createElement('td');
+                        cell.innerText = type
+                        bRow.appendChild(cell);
+                    }})})}})
+
+        let cRow = document.createElement('tr');
+        Object.values(info).forEach((typesObject, pos) => {
+            // console.log(typesObject)
+            if(typesObject !== null) {
+                Object.values(typesObject).filter((baseStat,index) => {
+                console.log(baseStat)
+                    if((baseStat === pokemonData2.stats[1].base_stat) && (Object.values(typesObject).indexOf(baseStat) === index)) {
+                    let cell = document.createElement('td');
+                    cell.innerText = baseStat
+                    cRow.appendChild(cell)
+                }})}})
+
+        table.appendChild(aRow);
+        table.appendChild(bRow);
+        table.appendChild(cRow);
+    })
+    di.append(table);
+}
+
+// pokemonData1.types[0].type['name']  "pokemon's type"
+
+//pokemonData1.name  "pokemon name"
+
+//pokemonData1.stats[1].stat['name'] "pokemon base attack stat name"
+
+//pokemonData1.stats[1].base_stat "pokemon base attack stat"\
+
+
 
 // const generateTableHead = (table, data) => {
 //     let thead = table.createTHead();
@@ -133,12 +222,6 @@ const pokemonInfo2 = () => {
 button.addEventListener('click', frontSprite);
 button.addEventListener('click', backSprite);
 
-// pokemonData1.types[0].type['name']  "pokemon's type"
 
-//pokemonData1.name  "pokemon name"
-
-//pokemonData1.stats[1].stat['name'] "pokemon base attack stat name"
-
-//pokemonData1.stats[1].base_stat "pokemon base attack stat"
 
 

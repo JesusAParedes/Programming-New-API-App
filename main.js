@@ -94,7 +94,7 @@ const createTable = (localArray) => {
             // console.log(name)
             if((name === pokemonData1.name) && (Object.values(info).indexOf(name) === pos)) {
                 let cell = document.createElement('td');
-                cell.innerText = name
+                cell.innerText = 'Pokemon Name:' + ' ' + name
                 aRow.appendChild(cell);
             }})
 
@@ -106,7 +106,7 @@ const createTable = (localArray) => {
                         // console.log(type);
                         if((type === pokemonData1.types[0].type['name']) && (Object.values(typeObject).indexOf(type) === pos)) {
                         let cell = document.createElement('td');
-                        cell.innerText = type
+                        cell.innerText = 'Pokemon Type:' + ' ' + type 
                         bRow.appendChild(cell);
                     }})})}})
 
@@ -115,10 +115,10 @@ const createTable = (localArray) => {
             // console.log(typesObject)
             if(typesObject !== null) {
                 Object.values(typesObject).filter((baseStat,index) => {
-                // console.log(baseStat)
+                console.log(baseStat)
                     if((baseStat === pokemonData1.stats[1].base_stat) && (Object.values(typesObject).indexOf(baseStat) === index)) {
                     let cell = document.createElement('td');
-                    cell.innerText = baseStat
+                    cell.innerText = 'Pokemon Attack Stat:' + ' ' + baseStat
                     cRow.appendChild(cell)
                 }})}})
 
@@ -141,7 +141,7 @@ const createTable2 = (localArray2) => {
             // console.log(name)
             if((name === pokemonData2.name) && (Object.values(info).indexOf(name) === pos)) {
                 let cell = document.createElement('td');
-                cell.innerText = name
+                cell.innerText = 'Pokemon Name:' + ' ' + name
                 aRow.appendChild(cell);
             }})
 
@@ -153,7 +153,7 @@ const createTable2 = (localArray2) => {
                         // console.log(type);
                         if((type === pokemonData2.types[0].type['name']) && (Object.values(typeObject).indexOf(type) === pos)) {
                         let cell = document.createElement('td');
-                        cell.innerText = type
+                        cell.innerText = 'Pokemon Type:' + ' ' + type
                         bRow.appendChild(cell);
                     }})})}})
 
@@ -162,10 +162,10 @@ const createTable2 = (localArray2) => {
             // console.log(typesObject)
             if(typesObject !== null) {
                 Object.values(typesObject).filter((baseStat,index) => {
-                // console.log(baseStat)
+                console.log(baseStat)
                     if((baseStat === pokemonData2.stats[1].base_stat) && (Object.values(typesObject).indexOf(baseStat) === index)) {
                     let cell = document.createElement('td');
-                    cell.innerText = baseStat
+                    cell.innerText = 'Pokemon Base Attack Stat:' + ' ' + baseStat
                     cRow.appendChild(cell)
                 }})}})
 

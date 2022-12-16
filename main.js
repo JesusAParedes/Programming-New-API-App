@@ -10,14 +10,16 @@ let localArray2;
 // document.body.append(button);
 
 const p = document.createElement('p');
-p.innerText = 'Choose your Pokemon!';
+p.innerText = 'Choose your Pokemon! (From first 151)';
 document.body.append(p);
 
 
 const input1 = document.createElement('input');
+input1.id = 'input1';
 document.body.append(input1);
 
 const input2 = document.createElement('input');
+input2.id = 'input2';
 document.body.append(input2);
 
 const fetchBut = document.createElement('button');
@@ -29,12 +31,15 @@ battle.innerHTML = 'Start battle!'
 document.body.append(battle);
 
  const grabData = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon/152/')
+    let inp1 = document.getElementById('input1').value;
+    let inp2 = document.getElementById('input2').value
+    
+    fetch('https://pokeapi.co/api/v2/pokemon/' + inp1)
     .then(res => res.json())
     .then(array => {
         pokemonData1 = array
     });
-    fetch('https://pokeapi.co/api/v2/pokemon/79/')
+    fetch('https://pokeapi.co/api/v2/pokemon/' + inp2)
     .then(res => res.json())
     .then(arr => pokemonData2 = arr)
 }
@@ -174,6 +179,8 @@ const createTable2 = (localArray2) => {
 battle.addEventListener('click', () => {
     frontSprite();
     backSprite();
+    createTable();
+    createTable2();
 })
 
 // pokemonData1.types[0].type['name']  "pokemon's type"

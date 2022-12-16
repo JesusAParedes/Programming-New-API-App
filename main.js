@@ -5,15 +5,30 @@ let pokemonData2;
 let localArray;
 let localArray2;
 
-const button = document.createElement('button');
-button.innerHTML = 'Determine who wins!';
-document.body.append(button);
+// const button = document.createElement('button');
+// button.innerHTML = 'Determine who wins!';
+// document.body.append(button);
 
-window.onload = () => {
-    grabData();
-}
+const p = document.createElement('p');
+p.innerText = 'Choose your Pokemon!';
+document.body.append(p);
 
-const grabData = () => {
+
+const input1 = document.createElement('input');
+document.body.append(input1);
+
+const input2 = document.createElement('input');
+document.body.append(input2);
+
+const fetchBut = document.createElement('button');
+fetchBut.innerHTML = 'Choose your Pokemon!';
+document.body.append(fetchBut);
+
+const battle = document.createElement('button');
+battle.innerHTML = 'Start battle!'
+document.body.append(battle);
+
+ const grabData = () => {
     fetch('https://pokeapi.co/api/v2/pokemon/152/')
     .then(res => res.json())
     .then(array => {
@@ -23,6 +38,9 @@ const grabData = () => {
     .then(res => res.json())
     .then(arr => pokemonData2 = arr)
 }
+
+fetchBut.addEventListener('click', grabData);
+
 
 const frontSprite = () => {
     const div = document.createElement('div');
@@ -88,7 +106,7 @@ const createTable = (localArray) => {
                     }})})}})
 
         let cRow = document.createElement('tr');
-        Object.values(info).forEach((typesObject, pos) => {
+        Object.values(info).forEach((typesObject) => {
             // console.log(typesObject)
             if(typesObject !== null) {
                 Object.values(typesObject).filter((baseStat,index) => {
@@ -103,14 +121,14 @@ const createTable = (localArray) => {
         table.appendChild(bRow);
         table.appendChild(cRow);
     })
-    di.append(table);
+    document.body.append(table);
 }
 
 const createTable2 = (localArray2) => {
     const table = document.createElement('table');
     const di = document.getElementById('something');
     localArray2 = Object.values(pokemonData2);
-    console.log(localArray2)
+    // console.log(localArray2);
 
     localArray2.forEach(info => {
         let aRow = document.createElement('tr');
@@ -135,11 +153,11 @@ const createTable2 = (localArray2) => {
                     }})})}})
 
         let cRow = document.createElement('tr');
-        Object.values(info).forEach((typesObject, pos) => {
+        Object.values(info).forEach((typesObject) => {
             // console.log(typesObject)
             if(typesObject !== null) {
                 Object.values(typesObject).filter((baseStat,index) => {
-                console.log(baseStat)
+                // console.log(baseStat)
                     if((baseStat === pokemonData2.stats[1].base_stat) && (Object.values(typesObject).indexOf(baseStat) === index)) {
                     let cell = document.createElement('td');
                     cell.innerText = baseStat
@@ -150,8 +168,13 @@ const createTable2 = (localArray2) => {
         table.appendChild(bRow);
         table.appendChild(cRow);
     })
-    di.append(table);
+    document.body.append(table);
 }
+
+battle.addEventListener('click', () => {
+    frontSprite();
+    backSprite();
+})
 
 // pokemonData1.types[0].type['name']  "pokemon's type"
 
@@ -160,6 +183,25 @@ const createTable2 = (localArray2) => {
 //pokemonData1.stats[1].stat['name'] "pokemon base attack stat name"
 
 //pokemonData1.stats[1].base_stat "pokemon base attack stat"\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -188,39 +230,38 @@ const createTable2 = (localArray2) => {
 // let table = document.querySelector("table");
 // generateTable(table);
 
-const pokemonInfo1 = () => {
-    const li = document.createElement('li');
+// const pokemonInfo1 = () => {
+//     const li = document.createElement('li');
 
-    localArray = Object.values(pokemonData1);
+//     localArray = Object.values(pokemonData1);
 
-    const text = document.createTextNode(`Pokemon's Type: ${localArray[16][0].type.name}
-    Base Attack Stat: ${localArray[15][1].base_stat}`)
-        console.log(text);
-        li.appendChild(text);
-        but.append(li);
+//     const text = document.createTextNode(`Pokemon's Type: ${localArray[16][0].type.name}
+//     Base Attack Stat: ${localArray[15][1].base_stat}`)
+//         console.log(text);
+//         li.appendChild(text);
+//         but.append(li);
 
-    }
+//     }
     
 
 
 
-const pokemonInfo2 = () => {
-    const li = document.createElement('li');
+// const pokemonInfo2 = () => {
+//     const li = document.createElement('li');
 
-    localArray2 = Object.values(pokemonData2);
+//     localArray2 = Object.values(pokemonData2);
 
-    const text = document.createTextNode(`Pokemon's Type: ${localArray2[16][0].type.name}
-    Base Attack Stat: ${localArray2[15][1].base_stat}`)
-        console.log(text);
-        li.appendChild(text);
-        but2.append(li);
-}
-
-
+//     const text = document.createTextNode(`Pokemon's Type: ${localArray2[16][0].type.name}
+//     Base Attack Stat: ${localArray2[15][1].base_stat}`)
+//         console.log(text);
+//         li.appendChild(text);
+//         but2.append(li);
+// }
 
 
-button.addEventListener('click', frontSprite);
-button.addEventListener('click', backSprite);
+
+
+
 
 
 

@@ -165,17 +165,17 @@ const checkWinner =() => {
     let userInput = document.getElementById('typeWinner').value;
     let checkInput = userInput.toLowerCase();
     if((pokemonData1.stats[1].base_stat > pokemonData2.stats[1].base_stat) && (pokemonData1.name === checkInput)) {
-        window.alert(`${pokemonData1.name} will win!`)
+        return window.alert(`${pokemonData1.name} will win!`)
     }
     if((pokemonData1.stats[1].base_stat < pokemonData2.stats[1].base_stat) && (pokemonData2.name === checkInput)) {
-        window.alert(`${pokemonData2.name} will win!`)
+        return window.alert(`${pokemonData2.name} will win!`)
     } 
     if((pokemonData1.stats[1].base_stat === pokemonData2.stats[1].base_stat)) {
-        window.alert(`Attack Stat equal. Try Again`)
+        return window.alert(`Attack Stat equal. Try Again`)
     }
     if((checkInput !== pokemonData1.name) && (checkInput !== pokemonData2.name)) {
-        window.alert(`Pokemon Name Incorrect. Try Again.`)}
-    else {window.alert(`Try Again.`)}
+        return window.alert(`Pokemon Name Incorrect. Try Again.`)}
+    else {return window.alert(`Try Again.`)}
 
 }
 

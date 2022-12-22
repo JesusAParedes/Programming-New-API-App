@@ -32,7 +32,7 @@ document.body.append(battle);
 
  const grabData = () => {
     let inp1 = document.getElementById('input1').value;
-    let inp2 = document.getElementById('input2').value
+    let inp2 = document.getElementById('input2').value;
     
     fetch('https://pokeapi.co/api/v2/pokemon/' + inp1)
     .then(res => res.json())
@@ -82,134 +82,126 @@ const backSprite = () => {
 
 }
 
-const createTable = (localArray) => {
+const createTable = () => {
     const table = document.createElement('table');
+    let aRow = document.createElement('tr');
+    let cell = document.createElement('td');
+    let empty = document.createElement('td');
+    let empty2 = document.createElement('td');
+    let empty3 = document.createElement('td');
+    let cell1 = document.createElement('td');
+    let cell2 = document.createElement('td');
+    cell.innerText = 'Name';
+    cell1.innerText = 'Attack Stat';
+    cell2.innerText = 'Type';
+    aRow.appendChild(cell);
+    aRow.appendChild(empty);
+    aRow.appendChild(cell1);
+    aRow.appendChild(cell2);
+    table.appendChild(aRow);
+    document.body.append(table);
+
     localArray = Object.entries(pokemonData1);
     console.log(localArray)
     let names = localArray.filter(info => info[0] === 'name');
     // console.log(names);
     let name = Object.entries(names);
-    let cell = document.createElement('td');
-    cell.innerText =  name[0][1][1].toUpperCase();
+    let poke1Cell1 = document.createElement('td');
+    poke1Cell1.innerText =  name[0][1][1].toUpperCase();
     let stats = localArray.filter(stat => stat[0] === 'stats');
     let allStats = stats[0][1];
     let attack = allStats.filter(stat => stat.stat['name'] === 'attack');
-    let cell2 = document.createElement('td');
-    cell2.innerText = attack[0]['base_stat'];
+    let poke1Cell2 = document.createElement('td');
+    poke1Cell2.innerText = attack[0]['base_stat'];
 
-    let aRow = document.createElement('tr');
     let bRow = document.createElement('tr');
-    aRow.appendChild(cell);
-    bRow.appendChild(cell2);
-    table.appendChild(aRow);
+    bRow.appendChild(poke1Cell1);
+    bRow.appendChild(empty2);
+    bRow.appendChild(poke1Cell2);
     table.appendChild(bRow);
-    document.body.append(table);
+    
 
     
     let types = localArray.filter(type => type[0] === 'types');
     for(let i=0; i< types.length; i++) { 
-        let cRow = document.createElement('tr');
-        let cell3 = document.createElement('td');
+        let poke1Cell3 = document.createElement('td');
         pokemonType = types[0][1][i].type['name'];
         console.log(pokemonType);
-        cell3.innerText += pokemonType;
-        cRow.appendChild(cell3);
-        table.appendChild(cRow);
+        poke1Cell3.innerText += pokemonType;
+        bRow.appendChild(poke1Cell3);
     } 
-    
-}
 
-const createTable2 = (localArray2) => {
-    const table = document.createElement('table');
     localArray2 = Object.entries(pokemonData2);
     console.log(localArray2)
-    let names = localArray2.filter(info => info[0] === 'name');
+    let names2 = localArray2.filter(info => info[0] === 'name');
     // console.log(names);
-    let name = Object.entries(names);
-    let cell = document.createElement('td');
-    cell.innerText =  name[0][1][1].toUpperCase();
-    let stats = localArray2.filter(stat => stat[0] === 'stats');
-    let allStats = stats[0][1];
-    let attack = allStats.filter(stat => stat.stat['name'] === 'attack');
-    let cell2 = document.createElement('td');
-    cell2.innerText = attack[0]['base_stat'];
+    let name2 = Object.entries(names2);
+    let poke2Cell1 = document.createElement('td');
+    poke2Cell1.innerText =  name2[0][1][1].toUpperCase();
+    let stats2 = localArray2.filter(stat => stat[0] === 'stats');
+    let allStats2 = stats2[0][1];
+    let attack2 = allStats2.filter(stat => stat.stat['name'] === 'attack');
+    let poke2Cell2 = document.createElement('td');
+    poke2Cell2.innerText = attack2[0]['base_stat'];
 
-    let aRow = document.createElement('tr');
-    let bRow = document.createElement('tr');
-    aRow.appendChild(cell);
-    bRow.appendChild(cell2);
-    table.appendChild(aRow);
-    table.appendChild(bRow);
-    document.body.append(table);
+    let cRow = document.createElement('tr');
+    cRow.appendChild(poke2Cell1);
+    cRow.appendChild(empty3);
+    cRow.appendChild(poke2Cell2);
+    table.appendChild(cRow);
 
     
-    let types = localArray2.filter(type => type[0] === 'types');
-    for(let i=0; i< types.length; i++) { 
-        let cRow = document.createElement('tr');
-        let cell3 = document.createElement('td');
-        pokemonType2 = types[0][1][i].type['name'];
+    let types2 = localArray2.filter(type => type[0] === 'types');
+    for(let i=0; i< types2.length; i++) { 
+        let poke2Cell3 = document.createElement('td');
+        pokemonType2 = types2[0][1][i].type['name'];
         console.log(pokemonType2);
-        cell3.innerText += pokemonType2;
-        cRow.appendChild(cell3);
-        table.appendChild(cRow);
+        poke2Cell3.innerText += pokemonType2;
+        cRow.appendChild(poke2Cell3);
     } 
-    
+}
+
+const checkWinner =() => {
+    let userInput = document.getElementById('typeWinner').value;
+    let checkInput = userInput.toLowerCase();
+    if((pokemonData1.stats[1].base_stat > pokemonData2.stats[1].base_stat) && (pokemonData1.name === checkInput)) {
+        window.alert(`${pokemonData1.name} will win!`)
+    }
+    if((pokemonData1.stats[1].base_stat < pokemonData2.stats[1].base_stat) && (pokemonData2.name === checkInput)) {
+        window.alert(`${pokemonData2.name} will win!`)
+    } 
+    if((pokemonData1.stats[1].base_stat === pokemonData2.stats[1].base_stat)) {
+        window.alert(`Attack Stat equal. Try Again`)
+    } else
+    if((checkInput !== pokemonData1.name) || (checkInput !== pokemonData2.name)) {
+        window.alert(`Pokemon Name Incorrect. Try Again.`)}
+
+}
+
+const winnerInput = () => {
+    const p = document.createElement('p');
+    p.innerText = "Type in Pokemon's name to check."
+    document.body.append(p);
+
+    const typeWinner = document.createElement('input');
+    typeWinner.id = 'typeWinner';
+    document.body.append(typeWinner);
+
+    const winner = document.createElement('button');
+    winner.innerHTML = 'Who wins based off attack stat?';
+    document.body.append(winner);
+
+    winner.addEventListener('click', checkWinner);
+
 }
 
 
-// const createTable2 = (localArray2) => {
-//     const table = document.createElement('table');
-//     const di = document.getElementById('something');
-//     localArray2 = Object.values(pokemonData2);
-//     // console.log(localArray2);
-
-//     localArray2.forEach(info => {
-//         let aRow = document.createElement('tr');
-//         Object.values(info).filter((name, pos) => {
-//             // console.log(name)
-//             if((name === pokemonData2.name) && (Object.values(info).indexOf(name) === pos)) {
-//                 let cell = document.createElement('td');
-//                 cell.innerText = 'Pokemon Name:' + ' ' + name
-//                 aRow.appendChild(cell);
-//             }})
-
-//         let bRow = document.createElement('tr');
-//         Object.values(info).forEach((typesObject, pos) => {
-//             if(typesObject !== null) {
-//                 Object.values(typesObject).forEach(typeObject => {
-//                     Object.values(typeObject).filter(type => {
-//                         // console.log(type);
-//                         if((type === pokemonData2.types[0].type['name'])) {
-//                         let cell = document.createElement('td');
-//                         cell.innerText = 'Pokemon Type:' + ' ' + type
-//                         bRow.appendChild(cell);
-//                     }})})}})
-
-//         let cRow = document.createElement('tr');
-//         Object.values(info).forEach((typesObject, pos) => {
-//             console.log(typesObject)
-//             if(typesObject !== null) {
-//                 Object.values(typesObject).filter((baseStat, index) => {
-//                     if((baseStat === pokemonData2.stats[1].base_stat) && (pokemonData2.stats[1].stat['name'] === 'attack')) {
-//                         // console.log(baseStat)
-//                     let cell = document.createElement('td');
-//                     cell.innerText = 'Pokemon Attack Stat:' + ' ' + baseStat
-//                     cRow.appendChild(cell)
-//                 }})
-//             }})
-
-//         table.appendChild(aRow);
-//         table.appendChild(bRow);
-//         table.appendChild(cRow);
-//     })
-//     document.body.append(table);
-// }
 
 battle.addEventListener('click', () => {
     frontSprite();
     backSprite();
     createTable();
-    createTable2();
+    winnerInput();
 })
 
 // pokemonData1.types[0].type['name']  "pokemon's type"

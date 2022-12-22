@@ -32,14 +32,17 @@ button {
   
   table {
     border-collapse: collapse;
+    align-items: center;
     display: flex;
+    flex-direction: column;
     border-spacing: 0;
-    width: 20%;
+    width: min-content;
     border: 1px solid #ddd;
     /* margin: auto; */
   }
   
   th, td {
-    text-align: middle;
-    padding: 16px;
+    /* text-align: middle; */
+    padding: 20px;
+    padding-right: 25px;
   }  

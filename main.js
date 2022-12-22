@@ -172,9 +172,10 @@ const checkWinner =() => {
     } 
     if((pokemonData1.stats[1].base_stat === pokemonData2.stats[1].base_stat)) {
         window.alert(`Attack Stat equal. Try Again`)
-    } else
+    }
     if((checkInput !== pokemonData1.name) && (checkInput !== pokemonData2.name)) {
         window.alert(`Pokemon Name Incorrect. Try Again.`)}
+    else {window.alert(`Try Again.`)}
 
 }
 

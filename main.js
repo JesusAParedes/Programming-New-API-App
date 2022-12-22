@@ -10,7 +10,7 @@ let localArray2;
 // document.body.append(button);
 
 const p = document.createElement('p');
-p.innerText = 'Choose your Pokemon! (From first 151)';
+p.innerText = 'Choose your Pokemon! Type in names of two pokemon or their pokedex entries. (Up to 493)';
 document.body.append(p);
 
 

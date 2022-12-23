@@ -1,36 +1,37 @@
-// require('dotenv').config();
-
+//variables for storing my data
 let pokemonData1;
 let pokemonData2;
 let localArray;
 let localArray2;
 
-// const button = document.createElement('button');
-// button.innerHTML = 'Determine who wins!';
-// document.body.append(button);
-
-const p = document.createElement('p');
+//paragraph created to tell user what to do
+const p = document.createElement('p'); 
 p.innerText = 'Choose your Pokemon! Type in names of two pokemon or their pokedex entries. (Up to 493)';
 document.body.append(p);
 
-
-const input1 = document.createElement('input');
+//input for first pokemon created and put on page. Gave the input an id
+const input1 = document.createElement('input'); 
 input1.id = 'input1';
 document.body.append(input1);
 
-const input2 = document.createElement('input');
+//input for second pokemon created and put on page. Gave the input an id.
+const input2 = document.createElement('input'); 
 input2.id = 'input2';
 document.body.append(input2);
 
+//button created that will choose pokemon by fetching the data from API
 const fetchBut = document.createElement('button');
 fetchBut.innerHTML = 'Choose your Pokemon!';
 document.body.append(fetchBut);
 
+//button that will load the selected data when clicked on to start battle
 const battle = document.createElement('button');
 battle.innerHTML = 'Start battle!'
 document.body.append(battle);
 
+//function that will fetch data from API
  const grabData = () => {
+    //inp1 & inp2 are the values the user will put in the inputs to fetch the selected pokemon
     let inp1 = document.getElementById('input1').value;
     let inp2 = document.getElementById('input2').value;
     
@@ -44,42 +45,32 @@ document.body.append(battle);
     .then(arr => pokemonData2 = arr)
 }
 
+//Eventlistener that will fetch data from API when the button is clicked
 fetchBut.addEventListener('click', grabData);
 
-
+//place the sprite of the second pokemon onto the page
 const frontSprite = () => {
+    //create a div with an id
     const div = document.createElement('div');
     div.id = "div1"
+    //create an image
     const img = document.createElement('img');
-    console.log(pokemonData2)
+    //grab the file for the image of the pokemon and attach it to the image element. Attach that image to the div and then to the body
     img.src = pokemonData2.sprites.versions['generation-iv']['heartgold-soulsilver'].front_shiny
     div.append(img);
     document.body.append(div);
-
-    // const but2 = document.createElement('button');
-    // but2.id = "but2";
-    // but2.innerHTML = 'Slowpoke Stats';
-    // document.body.append(but2);
-
-    // but2.addEventListener('click', createTable2);
-
 }
 
+//place the sprite of the first pokemon onto the page
 const backSprite = () => {
+    //create a div with an id
     const div2 = document.createElement('div');
+     //create an image
     const img = document.createElement('img');
-    console.log(pokemonData1)
+    //grab the file for the image of the pokemon and attach it to the image element. Attach that image to the div and then to the body
     img.src = pokemonData1.sprites.versions['generation-iv']['heartgold-soulsilver'].back_shiny
     div2.append(img);
     document.body.append(div2);
-    
-    // const but = document.createElement('button');
-    // but.id = "but";
-    // but.innerHTML = 'Chikorita Stats';
-    // document.body.append(but);
-
-    // but.addEventListener('click', createTable);
-
 }
 
 const createTable = () => {
@@ -195,8 +186,6 @@ const winnerInput = () => {
     winner.addEventListener('click', checkWinner);
 
 }
-
-
 
 battle.addEventListener('click', () => {
     frontSprite();

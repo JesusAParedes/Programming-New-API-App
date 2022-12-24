@@ -73,78 +73,105 @@ const backSprite = () => {
     document.body.append(div2);
 }
 
+//function to create a table and put data from the API to display to the user about the two pokemon
 const createTable = () => {
+    //creates the table
     const table = document.createElement('table');
+    //creates the header row and cells. Added inner text to cells that tell what is in each column
     let aRow = document.createElement('tr');
     let cell = document.createElement('td');
-    let empty = document.createElement('td');
-    let empty2 = document.createElement('td');
-    let empty3 = document.createElement('td');
     let cell1 = document.createElement('td');
     let cell2 = document.createElement('td');
     cell.innerText = 'Name';
     cell1.innerText = 'Attack Stat';
     cell2.innerText = 'Type';
+    //append the cells to the row
     aRow.appendChild(cell);
-    aRow.appendChild(empty);
     aRow.appendChild(cell1);
     aRow.appendChild(cell2);
+    //append the row to the table
     table.appendChild(aRow);
+    //append the table to the page
     document.body.append(table);
 
+    //set localArray to be an array of the data fetched from the site
     localArray = Object.entries(pokemonData1);
-    console.log(localArray)
+    // console.log(localArray)
+    //filter the data for the array that starts with name at index 0
     let names = localArray.filter(info => info[0] === 'name');
     // console.log(names);
+    //create an array of the data in the names array
     let name = Object.entries(names);
     let poke1Cell1 = document.createElement('td');
+    //grab the name of the pokemon from the data and put in cell
     poke1Cell1.innerText =  name[0][1][1].toUpperCase();
+
+    //filter the data for the array that starts with stats at index 0
     let stats = localArray.filter(stat => stat[0] === 'stats');
+    console.log(stats);
+    //set allStats to be the array for all stats
     let allStats = stats[0][1];
+    //filter through the array and look for the one that has 'attack' as the name
     let attack = allStats.filter(stat => stat.stat['name'] === 'attack');
     let poke1Cell2 = document.createElement('td');
+    //grab the stat of the pokemon from the data and put in cell
     poke1Cell2.innerText = attack[0]['base_stat'];
 
     let bRow = document.createElement('tr');
+    //append the cells to the row
     bRow.appendChild(poke1Cell1);
-    bRow.appendChild(empty2);
     bRow.appendChild(poke1Cell2);
+    //append the table to the page
     table.appendChild(bRow);
     
-
-    
+    //filter the data for the array that starts with types at index 0
     let types = localArray.filter(type => type[0] === 'types');
-    for(let i=0; i< types.length; i++) { 
+    console.log(types)
+    //loop through the types and print out to the cell the pokemon type
+    for(let i=0; i< types[0][1].length; i++) { 
         let poke1Cell3 = document.createElement('td');
+        poke1Cell3.id = 'pokemon1types'
         pokemonType = types[0][1][i].type['name'];
         console.log(pokemonType);
-        poke1Cell3.innerText += pokemonType;
+        poke1Cell3.innerText = pokemonType;
         bRow.appendChild(poke1Cell3);
     } 
 
+    //set localArray2 to be an array of the data fetched from the site
     localArray2 = Object.entries(pokemonData2);
     console.log(localArray2)
+    //filter the data for the array that starts with name at index 0
     let names2 = localArray2.filter(info => info[0] === 'name');
     // console.log(names);
+    //create an array of the data in the names array
     let name2 = Object.entries(names2);
     let poke2Cell1 = document.createElement('td');
+    //grab the name of the pokemon from the data and put in cell
     poke2Cell1.innerText =  name2[0][1][1].toUpperCase();
+
+    //filter the data for the array that starts with stats at index 0
     let stats2 = localArray2.filter(stat => stat[0] === 'stats');
+    //set allStats to be the array for all stats
     let allStats2 = stats2[0][1];
+    //filter through the array and look for the one that has 'attack' as the name
     let attack2 = allStats2.filter(stat => stat.stat['name'] === 'attack');
     let poke2Cell2 = document.createElement('td');
+    //grab the stat of the pokemon from the data and put in cell
     poke2Cell2.innerText = attack2[0]['base_stat'];
 
     let cRow = document.createElement('tr');
+    //append the cells to the row
     cRow.appendChild(poke2Cell1);
-    cRow.appendChild(empty3);
     cRow.appendChild(poke2Cell2);
+    //append the table to the page
     table.appendChild(cRow);
 
-    
+    //filter the data for the array that starts with types at index 0
     let types2 = localArray2.filter(type => type[0] === 'types');
-    for(let i=0; i< types2.length; i++) { 
+    //loop through the types and print out to the cell the pokemon type
+    for(let i=0; i< types2[0][1].length; i++) { 
         let poke2Cell3 = document.createElement('td');
+        poke2Cell3.id = 'pokemon2types'
         pokemonType2 = types2[0][1][i].type['name'];
         console.log(pokemonType2);
         poke2Cell3.innerText += pokemonType2;
@@ -153,40 +180,59 @@ const createTable = () => {
 }
 
 const checkWinner =() => {
+    //puts the user's input to a variable
     let userInput = document.getElementById('typeWinner').value;
+    //puts it to lowercase in case they make a letter uppercase
     let checkInput = userInput.toLowerCase();
+
+    //if the first pokemon has the higher stat, an alert tells you he wins
     if((pokemonData1.stats[1].base_stat > pokemonData2.stats[1].base_stat) && (pokemonData1.name === checkInput)) {
         return window.alert(`${pokemonData1.name} will win!`)
     }
+
+    //if the second pokemon has the higher stat, an alert tells you he wins
     if((pokemonData1.stats[1].base_stat < pokemonData2.stats[1].base_stat) && (pokemonData2.name === checkInput)) {
         return window.alert(`${pokemonData2.name} will win!`)
-    } 
+    }
+
+    //if the stats are equal, an alert tells you to try again
     if((pokemonData1.stats[1].base_stat === pokemonData2.stats[1].base_stat)) {
         return window.alert(`Attack Stat equal. Try Again`)
     }
+
+    //if nothing is typed in
+    if(checkInput === '') {
+        return window.alert(`Try Again`)}
+
+    //if what's typed in does not match either pokemon's name, it will let the user know
     if((checkInput !== pokemonData1.name) && (checkInput !== pokemonData2.name)) {
         return window.alert(`Pokemon Name Incorrect. Try Again.`)}
-    else {return window.alert(`Try Again.`)}
+    else {return window.alert(`Try Again.`)} //any other cases
 
 }
 
 const winnerInput = () => {
+    //creates the paragraph at the end prompting the user to check in the box
     const p = document.createElement('p');
     p.innerText = "Type in Pokemon's name to check."
     document.body.append(p);
 
+    //creates an input to type in
     const typeWinner = document.createElement('input');
     typeWinner.id = 'typeWinner';
     document.body.append(typeWinner);
 
+    //creates a button to click after typing in input
     const winner = document.createElement('button');
-    winner.innerHTML = 'Who wins based off attack stat?';
+    winner.innerHTML = 'Who has higher attack stat?';
     document.body.append(winner);
 
+    //runs to check winner after typing something
     winner.addEventListener('click', checkWinner);
 
 }
 
+//will load in sprites, table of stats, and bottom input/button for both pokemon after pushing the battle button
 battle.addEventListener('click', () => {
     frontSprite();
     backSprite();

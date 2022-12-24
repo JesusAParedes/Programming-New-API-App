@@ -46,3 +46,7 @@ button {
     padding: 20px;
     padding-right: 25px;
   }  
+
+  #pokemon1types, #pokemon2types {
+    padding: 8px;
+  }
